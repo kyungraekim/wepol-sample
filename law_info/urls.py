@@ -12,5 +12,7 @@ urlpatterns = [
     path('lstrm', views.get_lstrm_info, name='lstrm'),
     path('licbyl', views.get_licbyl_info, name='licbyl'),
     path('trty', views.get_trty_info, name='trty'),
-    path('all', views.get_all_info, name='all')
+    path('all', views.get_all_info, name='all'),
+    path('upload-page', views.render_upload_xml, name='upload_page'),
+    path('upload', views.upload_xml, name='upload')
 ]

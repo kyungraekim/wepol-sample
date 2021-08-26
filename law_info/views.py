@@ -1,10 +1,13 @@
 import json
 
 from django.contrib.auth.decorators import login_required
+from django.db import DataError
 from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
-from law_info.api import LawInfoRequest, xmltext_to_dict
 from law_info import models
+from law_info.api import LawInfoRequest, xmltext_to_dict
 
 sr = LawInfoRequest(
     key='hr45jWpc1dmMidXc5P3972DknBUxYAWElTbxlskPrRNqDD3ej5r6CW7ucKGAAI2LyH39Hkum3bE0A8HQQ9lAGQ%3D%3D',
@@ -16,6 +19,7 @@ sr = LawInfoRequest(
 # Create your views here.
 def index(request):
     return HttpResponse("Good")
+
 
 @login_required
 def get_admin_info(request):
@@ -105,7 +109,38 @@ def get_all_info(request):
 
 def insert_to_database(xmltext, model):
     content = xmltext_to_dict(xmltext)
-    body = content[model.entry_key][model.body_key]
+    _insert_to_database(content, model)
 
+
+def _insert_to_database(content, model):
+    body = content[model.entry_key][model.body_key]
+    if not isinstance(body, list):
+        body = [body]
     key_map = model.json_map
-    model.objects.get_or_create(**{k: body[v] for k, v in key_map.items()})
+    for line_no, content in enumerate(body):
+        try:
+            model.objects.get_or_create(**{k: content.get(v, None) for k, v in key_map.items()})
+        except DataError as err:
+            print('Insert failed at {}'.format(line_no))
+            raise err
+    return len(body)
+
+
+@login_required
+def render_upload_xml(request):
+    if request.method == 'POST':
+        json_dict = xmltext_to_dict(request.FILES['file'])
+        model = models.get_model_by_key(json_dict)
+        size = _insert_to_database(json_dict, model)
+        return render(request, 'upload.html', {'uploaded_items': size})
+    return render(request, 'upload.html')
+
+
+@csrf_exempt
+def upload_xml(request):
+    if request.method == 'POST':
+        json_dict = xmltext_to_dict(request.FILES['file'])
+        model = models.get_model_by_key(json_dict)
+        size = _insert_to_database(json_dict, model)
+        return HttpResponse('Uploaded {} items'.format(size))
+    return HttpResponse('Invalid')
