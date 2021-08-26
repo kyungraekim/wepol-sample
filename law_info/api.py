@@ -37,34 +37,39 @@ class LawInfoRequest:
             f'serviceKey={self._key}',
             f'target={target}',
             f'query={self._query}',
-            f'numOfRows={self._num_row}',
-            f'pageNo={self._page_no}'
+            'numOfRows={}',
+            'pageNo={}'
         ])
         return f'{self.URL_BASE}/{target}SearchList.do?' + quote
 
-    def get_admin_rule(self):
-        return requests.get(self.admin_rule)
+    def get_request_for(self, url_form, num_rows, page_no):
+        num_rows = num_rows if num_rows else self._num_row
+        page_no = page_no if page_no else self._page_no
+        return requests.get(url_form.format(num_rows, page_no))
 
-    def get_law_info(self):
-        return requests.get(self.law)
+    def get_admin_rule(self, num_rows=None, page_no=None):
+        return self.get_request_for(self.admin_rule, num_rows=num_rows, page_no=page_no)
 
-    def get_ordin_info(self):
-        return requests.get(self.ordin)
+    def get_law_info(self, num_rows=None, page_no=None):
+        return self.get_request_for(self.law, num_rows=num_rows, page_no=page_no)
 
-    def get_expc_info(self):
-        return requests.get(self.expc)
+    def get_ordin_info(self, num_rows=None, page_no=None):
+        return self.get_request_for(self.ordin, num_rows=num_rows, page_no=page_no)
 
-    def get_detc_info(self):
-        return requests.get(self.detc)
+    def get_expc_info(self, num_rows=None, page_no=None):
+        return self.get_request_for(self.expc, num_rows=num_rows, page_no=page_no)
 
-    def get_licbyl_info(self):
-        return requests.get(self.licbyl)
+    def get_detc_info(self, num_rows=None, page_no=None):
+        return self.get_request_for(self.detc, num_rows=num_rows, page_no=page_no)
 
-    def get_lstrm_info(self):
-        return requests.get(self.lstrm)
+    def get_licbyl_info(self, num_rows=None, page_no=None):
+        return self.get_request_for(self.licbyl, num_rows=num_rows, page_no=page_no)
 
-    def get_trty_info(self):
-        return requests.get(self.trty)
+    def get_lstrm_info(self, num_rows=None, page_no=None):
+        return self.get_request_for(self.lstrm, num_rows=num_rows, page_no=page_no)
+
+    def get_trty_info(self, num_rows=None, page_no=None):
+        return self.get_request_for(self.trty, num_rows=num_rows, page_no=page_no)
 
 
 def xmltext_to_dict(xml_text):
