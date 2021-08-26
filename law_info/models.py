@@ -18,19 +18,19 @@ class AdminRuleModel(models.Model):
     "생성일자": "20210319", 20
     """
     admin_rule_id = models.AutoField(primary_key=True)
-    admin_rule_identification = models.CharField(max_length=20)
-    admin_rule_serial = models.CharField(max_length=20)
-    admin_rule_name = models.CharField(max_length=200)
-    admin_rule_type = models.CharField(max_length=10)
-    issue_date = models.CharField(max_length=20)
-    issue_number = models.CharField(max_length=20)
-    competent_department_name = models.CharField(max_length=50)
-    history_class = models.CharField(max_length=20)
-    revision_class_code = models.CharField(max_length=10)
-    revision_class_name = models.CharField(max_length=20)
-    admin_rule_detail_link = models.CharField(max_length=500)
-    effective_date = models.CharField(max_length=20)
-    creation_date = models.CharField(max_length=20)
+    admin_rule_identification = models.CharField(max_length=20, null=True)
+    admin_rule_serial = models.CharField(max_length=20, null=True)
+    admin_rule_name = models.CharField(max_length=200, null=True)
+    admin_rule_type = models.CharField(max_length=10, null=True)
+    issue_date = models.CharField(max_length=20, null=True)
+    issue_number = models.CharField(max_length=20, null=True)
+    competent_department_name = models.CharField(max_length=50, null=True)
+    history_class = models.CharField(max_length=20, null=True)
+    revision_class_code = models.CharField(max_length=10, null=True)
+    revision_class_name = models.CharField(max_length=20, null=True)
+    admin_rule_detail_link = models.CharField(max_length=500, null=True)
+    effective_date = models.CharField(max_length=20, null=True)
+    creation_date = models.CharField(max_length=20, null=True)
 
     entry_key = 'AdmRulSearch'
     body_key = 'admrul'
@@ -72,20 +72,20 @@ class LawModel(models.Model):
     "법령상세링크": "/DRF/lawService.do?OC=sapphire_5&target=law&MST=232157&type=HTML&mobileYn=&efYd=20210518", 500
     """
     law_id = models.AutoField(primary_key=True)
-    law_identification = models.CharField(max_length=20)
-    law_serial = models.CharField(max_length=20)
-    current_history_code = models.CharField(max_length=20)
-    law_korean_name = models.CharField(max_length=200)
-    law_short_name = models.CharField(max_length=200)
-    announcement_date = models.CharField(max_length=20)
-    announcement_number = models.CharField(max_length=20)
-    revision_class_name = models.CharField(max_length=20)
-    competent_department_code = models.CharField(max_length=20)
-    competent_department_name = models.CharField(max_length=20)
-    law_class_name = models.CharField(max_length=20)
-    effective_date = models.CharField(max_length=20)
+    law_identification = models.CharField(max_length=20, null=True)
+    law_serial = models.CharField(max_length=20, null=True)
+    current_history_code = models.CharField(max_length=20, null=True)
+    law_korean_name = models.CharField(max_length=200, null=True)
+    law_short_name = models.CharField(max_length=200, null=True)
+    announcement_date = models.CharField(max_length=20, null=True)
+    announcement_number = models.CharField(max_length=20, null=True)
+    revision_class_name = models.CharField(max_length=20, null=True)
+    competent_department_code = models.CharField(max_length=20, null=True)
+    competent_department_name = models.CharField(max_length=20, null=True)
+    law_class_name = models.CharField(max_length=20, null=True)
+    effective_date = models.CharField(max_length=20, null=True)
     is_other_law = models.CharField(max_length=20, null=True)
-    law_detail_link = models.CharField(max_length=500)
+    law_detail_link = models.CharField(max_length=500, null=True)
 
     entry_key = "LawSearch"
     body_key = "law"
@@ -126,18 +126,18 @@ class OrdinModel(models.Model):
     "참조데이터구분": "0", 1
     """
     ordin_id = models.AutoField(primary_key=True)
-    ordin_identification = models.CharField(max_length=20)
-    ordin_serial = models.CharField(max_length=20)
-    ordin_name = models.CharField(max_length=500)
-    announcement_date = models.CharField(max_length=20)
-    announcement_number = models.CharField(max_length=10)
-    revision_class_name = models.CharField(max_length=10)
-    local_gov_agency_name = models.CharField(max_length=20)
-    ordin_type = models.CharField(max_length=10)
-    effective_date = models.CharField(max_length=20)
-    ordin_detail_link = models.CharField(max_length=500)
+    ordin_identification = models.CharField(max_length=20, null=True)
+    ordin_serial = models.CharField(max_length=20, null=True)
+    ordin_name = models.CharField(max_length=500, null=True)
+    announcement_date = models.CharField(max_length=20, null=True)
+    announcement_number = models.CharField(max_length=10, null=True)
+    revision_class_name = models.CharField(max_length=10, null=True)
+    local_gov_agency_name = models.CharField(max_length=20, null=True)
+    ordin_type = models.CharField(max_length=10, null=True)
+    effective_date = models.CharField(max_length=20, null=True)
+    ordin_detail_link = models.CharField(max_length=500, null=True)
     ordin_field_name = models.CharField(max_length=10, null=True)
-    reference_data_class = models.CharField(max_length=1)
+    reference_data_class = models.CharField(max_length=1, null=True)
 
     entry_key = "OrdinSearch"
     body_key = "law"
@@ -165,7 +165,7 @@ class ExpcModel(models.Model):
     "법령해석례일련번호": "313107", 10
     "안건명": "1959년 12월 31일 이전에 퇴직한 군인의 퇴직급여금 지급에 관한특별법 시행령 제4조제2항 및 3항", 500
     "안건번호": "05-0096", 20
-    "질의기관명": "국방부", 20
+    "질의기관명": "국방부", 20 --> 30
     "질의기관코드": "1290000", 10
     "회신기관명": "법제처", 20
     "회신기관코드": "1170000", 10
@@ -174,16 +174,16 @@ class ExpcModel(models.Model):
     "법령해석례상세링크": "/DRF/lawService.do?OC=sapphire_5&target=expc&ID=313107&type=HTML&mobileYn=", 500
     """
     expc_id = models.AutoField(primary_key=True)
-    expc_serial = models.CharField(max_length=10)
-    agenda_name = models.CharField(max_length=500)
-    agenda_number = models.CharField(max_length=20)
-    inquiry_org_name = models.CharField(max_length=20)
-    inquiry_org_code = models.CharField(max_length=10)
-    reply_org_name = models.CharField(max_length=20)
-    reply_org_code = models.CharField(max_length=10)
-    reply_date = models.CharField(max_length=20)
+    expc_serial = models.CharField(max_length=10, null=True)
+    agenda_name = models.CharField(max_length=500, null=True)
+    agenda_number = models.CharField(max_length=20, null=True)
+    inquiry_org_name = models.CharField(max_length=30, null=True)
+    inquiry_org_code = models.CharField(max_length=10, null=True)
+    reply_org_name = models.CharField(max_length=20, null=True)
+    reply_org_code = models.CharField(max_length=10, null=True)
+    reply_date = models.CharField(max_length=20, null=True)
     expc_class_name = models.CharField(max_length=20, null=True)
-    expc_detail_link = models.CharField(max_length=500)
+    expc_detail_link = models.CharField(max_length=500, null=True)
 
     entry_key = 'Expc'
     body_key = 'expc'
@@ -213,11 +213,11 @@ class DetcModel(models.Model):
     "헌재결정례상세링크": "/DRF/lawService.do?OC=sapphire_5&target=detc&ID=137495&type=HTML&mobileYn=", 500
     """
     detc_id = models.AutoField(primary_key=True)
-    detc_serial = models.CharField(max_length=10)
-    end_date = models.CharField(max_length=20)
-    case_number = models.CharField(max_length=20)
-    case_name = models.CharField(max_length=500)
-    detc_detail_link = models.CharField(max_length=500)
+    detc_serial = models.CharField(max_length=10, null=True)
+    end_date = models.CharField(max_length=20, null=True)
+    case_number = models.CharField(max_length=20, null=True)
+    case_name = models.CharField(max_length=500, null=True)
+    detc_detail_link = models.CharField(max_length=500, null=True)
 
     entry_key = 'DetcSearch'
     body_key = 'Detc'
@@ -252,21 +252,21 @@ class LicbylModel(models.Model):
     "별표법령상세링크": "/DRF/lawService.do?OC=sapphire_5&target=licbyl&ID=7979211&type=HTML&mobileYn=", 200
     """
     licbyl_id = models.AutoField(primary_key=True)
-    licbyl_serial = models.CharField(max_length=10)
-    related_law_serial = models.CharField(max_length=10)
-    related_law_id = models.CharField(max_length=10)
-    licbyl_name = models.CharField(max_length=500)
-    related_law_name = models.CharField(max_length=500)
-    licbyl_number = models.CharField(max_length=10)
-    licbyl_type = models.CharField(max_length=20)
-    competent_department_name = models.CharField(max_length=50)
-    announcement_date = models.CharField(max_length=10)
-    announcement_number = models.CharField(max_length=10)
-    revision_class_name = models.CharField(max_length=20)
-    law_type = models.CharField(max_length=20)
-    licbyl_format_file_link = models.CharField(max_length=200)
-    licbyl_format_pdf_link = models.CharField(max_length=200)
-    licbyl_law_detail_link = models.CharField(max_length=200)
+    licbyl_serial = models.CharField(max_length=10, null=True)
+    related_law_serial = models.CharField(max_length=10, null=True)
+    related_law_id = models.CharField(max_length=10, null=True)
+    licbyl_name = models.CharField(max_length=500, null=True)
+    related_law_name = models.CharField(max_length=500, null=True)
+    licbyl_number = models.CharField(max_length=10, null=True)
+    licbyl_type = models.CharField(max_length=20, null=True)
+    competent_department_name = models.CharField(max_length=50, null=True)
+    announcement_date = models.CharField(max_length=10, null=True)
+    announcement_number = models.CharField(max_length=10, null=True)
+    revision_class_name = models.CharField(max_length=20, null=True)
+    law_type = models.CharField(max_length=20, null=True)
+    licbyl_format_file_link = models.CharField(max_length=200, null=True)
+    licbyl_format_pdf_link = models.CharField(max_length=200, null=True)
+    licbyl_law_detail_link = models.CharField(max_length=200, null=True)
 
     entry_key = "licBylSearch"
     body_key = "licbyl"
@@ -302,12 +302,12 @@ class LstrmModel(models.Model):
     "법령종류코드": "010102", undefined
     """
     lstrm_id = models.AutoField(primary_key=True)
-    lstrm_identification = models.CharField(max_length=10)
-    lstrm_name = models.CharField(max_length=200)
-    lstrm_detail_search = models.CharField(max_length=500)
-    lstrm_detail_link = models.CharField(max_length=500)
-    dict_class_code = models.CharField(max_length=10)
-    law_type_code = models.CharField(max_length=10)
+    lstrm_identification = models.CharField(max_length=20, null=True)
+    lstrm_name = models.CharField(max_length=200, null=True)
+    lstrm_detail_search = models.CharField(max_length=500, null=True)
+    lstrm_detail_link = models.CharField(max_length=500, null=True)
+    dict_class_code = models.CharField(max_length=10, null=True)
+    law_type_code = models.CharField(max_length=10, null=True)
 
     entry_key = "LsTrmSearch"
     body_key = "lstrm"
@@ -338,16 +338,16 @@ class TrtyModel(models.Model):
     "조약상세링크": "/DRF/lawService.do?OC=sapphire_5&target=trty&ID=2308&type=HTML&mobileYn=", 500
     """
     trty_id = models.AutoField(primary_key=True)
-    trty_serial = models.CharField(max_length=10)
-    trty_name = models.CharField(max_length=500)
-    trty_class_code = models.CharField(max_length=10)
-    trty_class_name = models.CharField(max_length=20)
-    effective_date = models.CharField(max_length=20)
+    trty_serial = models.CharField(max_length=10, null=True)
+    trty_name = models.CharField(max_length=500, null=True)
+    trty_class_code = models.CharField(max_length=10, null=True)
+    trty_class_name = models.CharField(max_length=20, null=True)
+    effective_date = models.CharField(max_length=20, null=True)
     signature_date = models.CharField(max_length=20, null=True)
-    gazette_publication_date = models.CharField(max_length=20)
-    trty_number = models.CharField(max_length=20)
+    gazette_publication_date = models.CharField(max_length=20, null=True)
+    trty_number = models.CharField(max_length=20, null=True)
     country_number = models.CharField(max_length=10, null=True)
-    trty_detail_link = models.CharField(max_length=500)
+    trty_detail_link = models.CharField(max_length=500, null=True)
 
     entry_key = "TrtySearch"
     body_key = "Trty"
@@ -366,3 +366,19 @@ class TrtyModel(models.Model):
 
     class Meta:
         db_table = 'trtys'
+
+
+__ENTRY_TO_MODEL = {
+    model.entry_key: model for model in [
+        AdminRuleModel, LawModel, DetcModel, ExpcModel,
+        OrdinModel, LstrmModel, TrtyModel, LicbylModel,
+    ]
+}
+
+
+def get_model_by_key(json_dict):
+    entry_key = list(json_dict.keys())[0]
+    result = __ENTRY_TO_MODEL.get(entry_key, None)
+    if result is None:
+        raise AttributeError("Invalid key; Not any of {}".format(list(__ENTRY_TO_MODEL.keys())))
+    return result
